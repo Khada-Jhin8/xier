@@ -30,7 +30,7 @@ public class SendWa {
 
 
     @GetMapping("/wa")
-    public String goodNight(String msg) throws Exception {
+    public String goodNight() throws Exception {
         //获取当前时间
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = df.format(System.currentTimeMillis());
@@ -41,14 +41,13 @@ public class SendWa {
         //value/colorJson
         Map contentVC = new HashMap<String, String>();
         List list = new ArrayList<String>();
-//        String msg = "穿过挪威的森林\n" +
-//                "让我走进你的梦里\n" +
-//                "夕阳落在我的铠甲\n" +
-//                "王子不一定骑着白马\n" +
-//                "黑马王子四海为家\n" +
-//                "现在是晚上" + time + "\n" +
-//                "我是郑经人，美梦总相随。"+"\n" +
-//                "叮~晚安啦";
+        String msg = "穿过挪威的森林\n" +
+                "让我走进你的梦里\n" +
+                "夕阳落在我的铠甲\n" +
+                "王子不一定骑着白马\n" +
+                "黑马王子四海为家\n" +
+                "现在是晚上" + time + "\n" +
+                "王钰溪同学，晚安~";
         // 请求Accesstoken
         String getAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + wxSetting.getAppId() + "&secret=" + wxSetting.getAppSecret();
         String resData = Util.doGet(getAccessTokenUrl);
