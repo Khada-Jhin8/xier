@@ -1,4 +1,4 @@
-package vip.zhguo.xier;
+package vip.zhguo.xier.pojo;
 
 import lombok.Data;
 import lombok.ToString;

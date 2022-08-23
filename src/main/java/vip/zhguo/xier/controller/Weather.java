@@ -1,10 +1,12 @@
-package vip.zhguo.xier;
+package vip.zhguo.xier.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vip.zhguo.xier.Util;
+import vip.zhguo.xier.pojo.TempValue;
 import vip.zhguo.xier.pojo.WeatherDTO;
 
 import java.io.UnsupportedEncodingException;
@@ -21,7 +23,7 @@ public class Weather {
     @GetMapping("/xier")
     public String getWeather() throws Exception {
         WeatherDTO weatherDTO = new WeatherDTO();
-        String res = Util.getMethod(tempValue.getHuoqutianqi());
+        String res = Util.doGet(tempValue.getHuoqutianqi());
         JSONObject json = JSON.parseObject(res);
 //        Object today = json.get("result");
 //        System.out.println(today);
@@ -47,16 +49,10 @@ public class Weather {
         Map map2 = new HashMap();
         map2.put("title",URLEncoder.encode(tempValue.getServerjiangtitle(),"UTF-8"));
         map2.put("desp",URLEncoder.encode(tempValue.getServerjiangdesp(),"UTF-8"));
-        String s = Util.sendMsg(tempValue.getServerjiangurl(), map2.toString());
-        System.out.println(s);
+//        String s = Util.senMsgGet(tempValue.getServerjiangurl(), map2.toString());
+//        System.out.println(s);
         return today.toString();
     }
-    @GetMapping("/wa")
-    public String goodNight(String msg) throws UnsupportedEncodingException {
 
-        String s = Util.senMsgGet(tempValue.getServerjiangurl(), "晚安",msg);
-        System.out.println(s);
-        return s;
-    }
 }
 
