@@ -56,6 +56,7 @@ public class Weather {
 
         String s = Util.senMsgGet(tempValue.getServerjiangurl(), "晚安",msg);
         System.out.println(s);
+        sdadsasd
         return s;
     }
 }
