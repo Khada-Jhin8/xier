@@ -10,6 +10,7 @@
     </parent>
     <groupId>vip.zhguo</groupId>
     <artifactId>xier</artifactId>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>xier</name>
     <description>xier</description>
@@ -46,6 +47,7 @@
     </dependencies>
 
     <build>
+        <finalName>xier.jar</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

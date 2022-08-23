@@ -56,21 +56,23 @@ public class SendWa {
         Map resDataMap = (Map) JSONObject.parseObject(resData);
         String access_token = resDataMap.get("access_token").toString();
         log.info(access_token);
+        //发送消息
         String sendTemplateMsgUrl = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + access_token;
         //封装变量数据
-        contentVC.put("value",msg);
-        contentVC.put("color","#CCFFFF");
+        contentVC.put("value", msg);
+        contentVC.put("color", "#CCFFFF");
         //封装外层格式
-        map.put("touser",wxSetting.getToUser());
-        map.put("template_id",wxSetting.getTemplate());
-        map.put("topcolor","#33FF33");
-        dataMap.put("content",contentVC);
-        map.put("data",dataMap);
+        map.put("touser", wxSetting.getToUser());
+        map.put("template_id", wxSetting.getTemplate());
+        map.put("topcolor", "#33FF33");
+        dataMap.put("content", contentVC);
+        map.put("data", dataMap);
         String senData = JSONObject.toJSON(map).toString();
         log.info(senData);
         String result = Util.doPost(sendTemplateMsgUrl, senData);
         return result;
     }
+
     @GetMapping("/wa-t")
     public String goodNight_t(String msg) throws Exception {
         //获取当前时间
@@ -92,14 +94,14 @@ public class SendWa {
         log.info(access_token);
         String sendTemplateMsgUrl = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + access_token;
         //封装变量数据
-        contentVC.put("value",time);
-        contentVC.put("color","#0099FF");
+        contentVC.put("value", time);
+        contentVC.put("color", "#0099FF");
         //封装外层格式
-        map.put("touser",wxSetting.getToUser());
-        map.put("template_id",wxSetting.getTemplate());
-        map.put("topcolor","#33FF33");
-        dataMap.put("time",contentVC);
-        map.put("data",dataMap);
+        map.put("touser", wxSetting.getToUser());
+        map.put("template_id", wxSetting.getTemplate());
+        map.put("topcolor", "#33FF33");
+        dataMap.put("time", contentVC);
+        map.put("data", dataMap);
         String senData = JSONObject.toJSON(map).toString();
         log.info(senData);
         String result = Util.doPost(sendTemplateMsgUrl, senData);
