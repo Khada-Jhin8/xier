@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vip.zhguo.xier.util.NetUtil;
 import vip.zhguo.xier.pojo.TempValue;
 import vip.zhguo.xier.pojo.WxSetting;
+import vip.zhguo.xier.util.WxUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,43 +32,21 @@ public class SendWa {
     @GetMapping("/wa")
     public String goodNight() throws Exception {
         //获取当前时间
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat(" HH:mm");
         String time = df.format(System.currentTimeMillis());
-        //顶层json
-        Map map = new HashMap<String, String>();
-        //dataJson
-        Map dataMap = new HashMap<String, String>();
-        //value/colorJson
-        Map contentVC = new HashMap<String, String>();
-        List list = new ArrayList<String>();
-        String msg = "穿过挪威的森林\n" +
-                "让我走进你的梦里\n" +
-                "夕阳落在我的铠甲\n" +
-                "王子不一定骑着白马\n" +
-                "黑马王子四海为家\n" +
-                "现在是晚上" + time + "\n" +
-                "王钰溪同学，晚安~";
+        String msg = "(⊙o⊙)…夜深了，人静了，月亮婆婆都睡了，她还偷偷跟我说：\n" +
+                "让你\n" +
+                "多一点快乐.\n" +
+                "少一点烦恼.\n" +
+                "累了就睡觉.\n" +
+                "醒了就微笑.\n" +
+                "现在是凌晨"+time+"分\n"+
+                "小王同学，是时候和婆婆一起入睡了.Good Night~\n" +
+                "我是已经躺着了，就等你的晚安了~ლ(′◉o◉｀ლ)";
         // 请求Accesstoken
-        String getAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + wxSetting.getAppId() + "&secret=" + wxSetting.getAppSecret();
-        String resData = NetUtil.doGet(getAccessTokenUrl);
-        log.info(resData);
-        Map resDataMap = (Map) JSONObject.parseObject(resData);
-        String access_token = resDataMap.get("access_token").toString();
-        log.info(access_token);
+        String accessToken = WxUtil.getAccessToken(wxSetting.getAppId(), wxSetting.getAppSecret());
         //发送消息
-        String sendTemplateMsgUrl = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + access_token;
-        //封装变量数据
-        contentVC.put("value", msg);
-        contentVC.put("color", "#CCFFFF");
-        //封装外层格式
-        map.put("touser", wxSetting.getToUser());
-        map.put("template_id", wxSetting.getTemplate());
-        map.put("topcolor", "#33FF33");
-        dataMap.put("content", contentVC);
-        map.put("data", dataMap);
-        String senData = JSONObject.toJSON(map).toString();
-        log.info(senData);
-        String result = NetUtil.doPost(sendTemplateMsgUrl, senData);
+        String result = WxUtil.sendMsg(accessToken, msg,wxSetting);
         return result;
     }
 
@@ -76,69 +55,13 @@ public class SendWa {
         //获取当前时间
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = df.format(System.currentTimeMillis());
-        //顶层json
-        Map map = new HashMap<String, String>();
-        //dataJson
-        Map dataMap = new HashMap<String, String>();
-        //value/colorJson
-        Map contentVC = new HashMap<String, String>();
-        List list = new ArrayList<String>();
+
         // 请求Accesstoken
-        String getAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + wxSetting.getAppId() + "&secret=" + wxSetting.getAppSecret();
-        String resData = NetUtil.doGet(getAccessTokenUrl);
-        log.info(resData);
-        Map resDataMap = (Map) JSONObject.parseObject(resData);
-        String access_token = resDataMap.get("access_token").toString();
-        log.info(access_token);
+        String accessToken = WxUtil.getAccessToken(wxSetting.getAppId(), wxSetting.getAppSecret());
         //发送消息
-        String sendTemplateMsgUrl = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + access_token;
-        //封装变量数据
-        contentVC.put("value", msg);
-        contentVC.put("color", "#CCFFFF");
-        //封装外层格式
-        map.put("touser", wxSetting.getToUser());
-        map.put("template_id", wxSetting.getTemplate());
-        map.put("topcolor", "#33FF33");
-        dataMap.put("content", contentVC);
-        map.put("data", dataMap);
-        String senData = JSONObject.toJSON(map).toString();
-        log.info(senData);
-        String result = NetUtil.doPost(sendTemplateMsgUrl, senData);
+        String result = WxUtil.sendMsg(accessToken, msg,wxSetting);
         return result;
     }
 
-    @GetMapping("/wa-t")
-    public String goodNight_t(String msg) throws Exception {
-        //获取当前时间
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String time = df.format(System.currentTimeMillis());
-        //顶层json
-        Map map = new HashMap<String, String>();
-        //dataJson
-        Map dataMap = new HashMap<String, String>();
-        //value/colorJson
-        Map contentVC = new HashMap<String, String>();
-        List list = new ArrayList<String>();
-        // 请求Accesstoken
-        String getAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + wxSetting.getAppId() + "&secret=" + wxSetting.getAppSecret();
-        String resData = NetUtil.doGet(getAccessTokenUrl);
-        log.info(resData);
-        Map resDataMap = (Map) JSONObject.parseObject(resData);
-        String access_token = resDataMap.get("access_token").toString();
-        log.info(access_token);
-        String sendTemplateMsgUrl = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + access_token;
-        //封装变量数据
-        contentVC.put("value", time);
-        contentVC.put("color", "#0099FF");
-        //封装外层格式
-        map.put("touser", wxSetting.getToUser());
-        map.put("template_id", wxSetting.getTemplate());
-        map.put("topcolor", "#33FF33");
-        dataMap.put("time", contentVC);
-        map.put("data", dataMap);
-        String senData = JSONObject.toJSON(map).toString();
-        log.info(senData);
-        String result = NetUtil.doPost(sendTemplateMsgUrl, senData);
-        return result;
-    }
+
 }
