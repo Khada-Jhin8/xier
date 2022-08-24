@@ -5,11 +5,10 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vip.zhguo.xier.Util;
+import vip.zhguo.xier.util.NetUtil;
 import vip.zhguo.xier.pojo.TempValue;
 import vip.zhguo.xier.pojo.WeatherDTO;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +22,7 @@ public class Weather {
     @GetMapping("/xier")
     public String getWeather() throws Exception {
         WeatherDTO weatherDTO = new WeatherDTO();
-        String res = Util.doGet(tempValue.getHuoqutianqi());
+        String res = NetUtil.doGet(tempValue.getHuoqutianqi());
         JSONObject json = JSON.parseObject(res);
 //        Object today = json.get("result");
 //        System.out.println(today);
