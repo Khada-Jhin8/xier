@@ -23,6 +23,8 @@ public class WxSetting {
     @Value("${wx.touser}")
     private String toUser;
     @Value("${wx.template}")
-    private String template;
+    private String watemplate;
+    @Value("${wx.zatemplate}")
+    private String zatemplate;
 
 }

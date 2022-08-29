@@ -34,15 +34,16 @@ public class SendWa {
         //获取当前时间
         SimpleDateFormat df = new SimpleDateFormat(" HH:mm");
         String time = df.format(System.currentTimeMillis());
-        String msg = "(⊙o⊙)…夜深了，人静了，月亮婆婆都睡了，她还偷偷跟我说：\n" +
-                "让你\n" +
-                "多一点快乐.\n" +
-                "少一点烦恼.\n" +
-                "累了就睡觉.\n" +
-                "醒了就微笑.\n" +
-                "现在是凌晨"+time+"分\n"+
-                "小王同学，是时候和婆婆一起入睡了.Good Night~\n" +
-                "我是已经躺着了，就等你的晚安了~ლ(′◉o◉｀ლ)";
+        String msg = "(⊙o⊙)…溪儿的私人助理…(⊙o⊙)\n\n" +
+                " ━┉… ●━━……━━● …┉━ \n"+
+               "你的状态，就是你最好的风水\n" +
+                "不用活的太复杂，把心当做屋子\n" +
+                "定期打扫一下，该换的换，该丢的丢\n" +
+                "不动声色的变得越来越好\n"+
+                " ━┉… ●━━……━━● …┉━ \n\n"+
+                "现在是北京时间深夜"+time+"分\n" +
+                "我是郑经人儿\n" +
+                "zu美美滴你....周末愉快，晚安~ლ(′◉o◉｀ლ)";
         // 请求Accesstoken
         String accessToken = WxUtil.getAccessToken(wxSetting.getAppId(), wxSetting.getAppSecret());
         //发送消息
