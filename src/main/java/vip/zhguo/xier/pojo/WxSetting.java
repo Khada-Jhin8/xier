@@ -22,9 +22,10 @@ public class WxSetting {
     private String appSecret;
     @Value("${wx.touser}")
     private String toUser;
-    @Value("${wx.template}")
+    @Value("${wx.watemplate}")
     private String watemplate;
     @Value("${wx.zatemplate}")
     private String zatemplate;
+    private String flag;
 
 }

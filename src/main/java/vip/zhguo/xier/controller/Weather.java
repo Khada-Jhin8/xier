@@ -29,7 +29,7 @@ public class Weather {
     WxSetting wxSetting;
 
 //    @Scheduled(cron = "15,30,45 * * * * ?")
-    @GetMapping("/xier")
+    @GetMapping("/za")
     public String getWeather() throws Exception {
         WeatherDTO weatherDTO = new WeatherDTO();
         String res = NetUtil.doGet(tempValue.getHuoqutianqi());
@@ -54,19 +54,18 @@ public class Weather {
         /*日落时间(24小时制)*/
         weatherDTO.setWtSuns(map1.get("wtSuns").toString());
         log.info("weatherDTO"+weatherDTO.toString());
-
-        String msg ="(⊙o⊙)…溪儿的天气闹钟…(⊙o⊙)\n\n" +
-                    "每天给自己一个希望，试着不为明天而烦恼\n" +
-                    "不为昨天而叹息，只为今天更美好。早安～\n\n"+
-                    "今天是\t\t"+JodaTimeUtil.getNowDate(new Date(),"yyyy-MM-dd HH:mm:ss")+"\t\t"+ JodaTimeUtil.getWeek(new Date())+"\n"+
-                    "当前城市\t\t"+weatherDTO.getArea_3()+"\n"+
-                    "白天:"+weatherDTO.getWtNm1()+"\t\t气温:"+weatherDTO.getWtTemp1()+
-                    "\n夜间:"+weatherDTO.getWtNm2()+"\t\t气温:"+weatherDTO.getWtTemp2()+
-                    "\n日出时间:"+weatherDTO.getWtSunr()+"\t\t日落时间:"+ weatherDTO.getWtSuns();
+        wxSetting.setFlag("1");
+        String msg = "(⊙o⊙)…每天给自己一个希望，试着不为明天而烦恼\n" +
+                    "不为昨天而叹息，只为今天更美好。早安～\n\n";
+//                    "今天是\t\t"+JodaTimeUtil.getNowDate(new Date(),"yyyy-MM-dd HH:mm:ss")+"\t\t"+ JodaTimeUtil.getWeek(new Date())+"\n"+
+//                    "当前城市\t\t"+weatherDTO.getArea_3()+"\n"+
+//                    "白天:"+weatherDTO.getWtNm1()+"\t\t气温:"+weatherDTO.getWtTemp1()+
+//                    "\n夜间:"+weatherDTO.getWtNm2()+"\t\t气温:"+weatherDTO.getWtTemp2()+
+//                    "\n日出时间:"+weatherDTO.getWtSunr()+"\t\t日落时间:"+ weatherDTO.getWtSuns();
 
         String accessToken = WxUtil.getAccessToken(wxSetting.getAppId(), wxSetting.getAppSecret());
         //发送消息
-        String result = WxUtil.sendMsg(accessToken, msg,wxSetting);
+        String result = WxUtil.sendMsg(accessToken, msg,wxSetting,weatherDTO);
 //        System.out.println(s);
         return result;
     }

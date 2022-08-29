@@ -3,11 +3,14 @@ package vip.zhguo.xier.util;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class JodaTimeUtil {
+
     // 时间格式
-    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm";
     private JodaTimeUtil (){ }
     // 获取当前时间
     public static DateTime getCurrentTime (){
@@ -20,6 +23,12 @@ public class JodaTimeUtil {
     // 把时间以指定格式转换为字符串
     public static String getNowDate (Date date, String format){
         return new DateTime(date).toString(format) ;
+    }
+    //获取上海时间
+    public static String getShanghaiDateTime(){
+        SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT);
+        df.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        return df.format(new Date()).toString();
     }
     // 获取星期时间
     public static String getWeek (Object date){
