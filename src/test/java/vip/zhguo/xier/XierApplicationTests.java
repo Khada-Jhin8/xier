@@ -30,7 +30,7 @@ class XierApplicationTests {
     @Autowired
     WxSetting wxSetting;
 
-    @Test
+  /*  @Test
     void contextLoads() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         df.setTimeZone(TimeZone.getTimeZone("America/Whitehorse"));
@@ -65,13 +65,13 @@ class XierApplicationTests {
         weatherDTO.setWtNm1(map1.get("wtNm1").toString());
 //       /*天气(夜间)
         weatherDTO.setWtNm2(map1.get("wtNm2").toString());
-        /*温度(白天)*/
+        *//*温度(白天)*//*
         weatherDTO.setWtTemp1(map1.get("wtTemp1").toString());
-        /*温度(夜间)*/
+        *//*温度(夜间)*//*
         weatherDTO.setWtTemp2(map1.get("wtTemp2").toString());
-        /*日出时间*/
+        *//*日出时间*//*
         weatherDTO.setWtSunr(map1.get("wtSunr").toString());
-        /*日落时间(24小时制)*/
+        *//*日落时间(24小时制)*//*
         weatherDTO.setWtSuns(map1.get("wtSuns").toString());
         wxSetting.setFlag("1");
         String msg = "(⊙o⊙)…每天给自己一个希望，试着不为明天而烦恼\n" +
@@ -86,5 +86,5 @@ class XierApplicationTests {
         //发送消息
         String result = WxUtil.sendMsg(accessToken, msg,wxSetting,weatherDTO);
 
-    }
+    }*/
 }

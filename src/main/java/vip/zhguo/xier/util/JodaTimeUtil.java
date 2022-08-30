@@ -25,8 +25,8 @@ public class JodaTimeUtil {
         return new DateTime(date).toString(format) ;
     }
     //获取上海时间
-    public static String getShanghaiDateTime(){
-        SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT);
+    public static String getShanghaiDateTime(String format){
+        SimpleDateFormat df = new SimpleDateFormat(format);
         df.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         return df.format(new Date()).toString();
     }
