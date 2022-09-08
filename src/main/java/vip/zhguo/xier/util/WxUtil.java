@@ -67,7 +67,7 @@ public class WxUtil {
             map.put("template_id", wxSetting.getWatemplate());
 
         } else if (wxSetting.getFlag().equals("1")) {
-            String time = JodaTimeUtil.getShanghaiDateTime("yyyy-MM-dd HH:mm:ss") + "\t\t" + JodaTimeUtil.getWeek(new Date());
+            String time = JodaTimeUtil.getShanghaiDateTime("yyyy-MM-dd") + "\t\t" + JodaTimeUtil.getWeek(new Date());
 
             //封装time
             timeVC.put("value", "今天是" + time);

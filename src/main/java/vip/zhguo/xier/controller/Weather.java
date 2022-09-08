@@ -29,7 +29,7 @@ public class Weather {
     @Autowired
     WxSetting wxSetting;
 
-    @Scheduled(cron = "0 30 17 * * ?",zone="GMT+8")
+    @Scheduled(cron = "0 0 8 * * ?",zone="GMT+8")
     @ApiOperation(value = "1.默认")
     @GetMapping("/za")
     public String za() throws Exception {
@@ -57,8 +57,10 @@ public class Weather {
         weatherDTO.setWtSuns(map1.get("wtSuns").toString());
         log.info("weatherDTO" + weatherDTO.toString());
         wxSetting.setFlag("1");
-        String msg = "(⊙o⊙)…每天给自己一个希望，试着不为明天而烦恼\n" +
-                "不为昨天而叹息，只为今天更美好。早安～";
+        String msg =  "(⊙o⊙)…早安~公主殿下\n太阳起了你也起，你是人间小仙女，今天要开心呀~\n"+
+                "Slogan:目标清晰明了\t" +
+                "毅力超乎想象\t\t" +
+                "温柔而有力量.";
         String accessToken = WxUtil.getAccessToken(wxSetting.getAppId(), wxSetting.getAppSecret());
         //发送消息
         String result = WxUtil.sendMsg(accessToken, msg, wxSetting, weatherDTO);
