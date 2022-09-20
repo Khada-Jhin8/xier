@@ -29,7 +29,7 @@ public class Weather {
     @Autowired
     WxSetting wxSetting;
 
-    @Scheduled(cron = "0 0 8 * * ?",zone="GMT+8")
+    @Scheduled(cron = "0 30 7 * * ?",zone="GMT+8")
     @ApiOperation(value = "1.默认")
     @GetMapping("/za")
     public String za() throws Exception {
