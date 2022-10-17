@@ -50,7 +50,7 @@ public class WxUtil {
         StringBuilder sendMsgUrl = new StringBuilder("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=");
         sendMsgUrl.append(accessToken);
         contentVC.put("value", msg);
-        contentVC.put("color", "#CCFFFF");
+        contentVC.put("color", RandomColorUtil.getRandomColor());
 
         //封装外层格式
         map.put("touser", wxSetting.getToUser());
@@ -59,9 +59,9 @@ public class WxUtil {
         if (wxSetting.getFlag().equals("2")) {
             String time = JodaTimeUtil.getShanghaiDateTime("HH:mm");
             timeVC.put("value", "现在是北京时间" + time + "分");
-            timeVC.put("color", "#FFFF99");
-            endVc.put("value", "我是郑经人儿\n" + "zu美美滴你....晚安~ლ(′◉o◉｀ლ)");
-            endVc.put("color", "#99CC99");
+            timeVC.put("color", RandomColorUtil.getRandomColor());
+            endVc.put("value", "我是郑经人儿\n" + "zu美美又可爱滴你....晚安~ლ(′◉o◉｀ლ)");
+            endVc.put("color", RandomColorUtil.getRandomColor());
             dataMap.put("time", timeVC);
             dataMap.put("end", endVc);
             map.put("template_id", wxSetting.getWatemplate());
@@ -71,33 +71,33 @@ public class WxUtil {
 
             //封装time
             timeVC.put("value", "今天是" + time);
-            timeVC.put("color", "#FFFF99");
+            timeVC.put("color", RandomColorUtil.getRandomColor());
             dataMap.put("time", timeVC);
             //封装地区
             cityVC.put("value", "当前城市：" + weatherDTO.getArea_3());
-            cityVC.put("color", "#FFCCCC");
+            cityVC.put("color", RandomColorUtil.getRandomColor());
             dataMap.put("city", cityVC);
             //封装白天天气
             baitianVC.put("value", "白天:" + weatherDTO.getWtNm1() + "\t\t气温:" + weatherDTO.getWtTemp1() + "°");
-            baitianVC.put("color", "#FFCC99");
+            baitianVC.put("color", RandomColorUtil.getRandomColor());
             dataMap.put("baitian", baitianVC);
             //封装夜晚天气
             yewanVC.put("value", "夜间:" + weatherDTO.getWtNm2() + "\t\t气温:" + weatherDTO.getWtTemp2() + "°");
-            yewanVC.put("color", "#99CC99");
+            yewanVC.put("color", RandomColorUtil.getRandomColor());
             dataMap.put("yewan", yewanVC);
             //封装日出日落
             richuVC.put("value", "日出时间:" + weatherDTO.getWtSunr() + "\t\t日落时间:" + weatherDTO.getWtSuns());
-            richuVC.put("color", "#669966");
+            richuVC.put("color", RandomColorUtil.getRandomColor());
             dataMap.put("richu", richuVC);
 
             map.put("template_id", wxSetting.getZatemplate());
         }
         //封装msg
         dataMap.put("msg", contentVC);
-        log.info(dataMap.toString());
-        map.put("topcolor", "#33FF33");
+//        log.info(dataMap.toString());
+        map.put("topcolor", RandomColorUtil.getRandomColor());
         map.put("data", dataMap);
-        log.info(map.toString());
+//        log.info(map.toString());
         String senData = JSONObject.toJSON(map).toString();
         log.info(senData);
         String result = NetUtil.doPost(sendMsgUrl.toString(), senData);
