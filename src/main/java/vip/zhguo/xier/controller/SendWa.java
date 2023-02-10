@@ -1,6 +1,5 @@
 package vip.zhguo.xier.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -9,13 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import vip.zhguo.xier.util.JodaTimeUtil;
-import vip.zhguo.xier.util.NetUtil;
+import vip.zhguo.xier.entity.WaMessage;
 import vip.zhguo.xier.pojo.TempValue;
 import vip.zhguo.xier.pojo.WxSetting;
+import vip.zhguo.xier.service.IWaMessageService;
 import vip.zhguo.xier.util.WxUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -34,6 +32,9 @@ public class SendWa {
     @Autowired
     WxSetting wxSetting;
 
+    @Autowired
+    IWaMessageService waMessageService;
+
 
     @ApiOperation(value = "1.默认")
     @GetMapping("/wa")
@@ -45,9 +46,15 @@ public class SendWa {
         // 请求Accesstoken
         String accessToken = WxUtil.getAccessToken(wxSetting.getAppId(), wxSetting.getAppSecret());
         //发送消息
-        String result = WxUtil.sendMsg(accessToken, msg,wxSetting,null);
+        String result = WxUtil.sendMsg(accessToken, msg, wxSetting, null);
+        //记录到库
+        WaMessage waMessage = new WaMessage();
+        waMessage.setContent(msg);
+        waMessage.setCreate_time(new Date());
+        waMessageService.save(waMessage);
         return result;
     }
+
     @ApiOperation(value = "2.get带参")
     @GetMapping("/wa-g")
     public String goodNight(String msg) throws Exception {
@@ -55,16 +62,27 @@ public class SendWa {
         // 请求Accesstoken
         String accessToken = WxUtil.getAccessToken(wxSetting.getAppId(), wxSetting.getAppSecret());
         //发送消息
-        String result = WxUtil.sendMsg(accessToken, msg,wxSetting,null);
+        String result = WxUtil.sendMsg(accessToken, msg, wxSetting, null);
+        //记录到库
+        WaMessage waMessage = new WaMessage();
+        waMessage.setContent(msg);
+        waMessage.setCreate_time(new Date());
+        waMessageService.save(waMessage);
         return result;
     }
+
     @ApiOperation(value = "3.post带参")
     @PostMapping("/wa-p")
-    public String goodNightp(@RequestBody Map msg) throws Exception{
+    public String goodNightp(@RequestBody Map msg) throws Exception {
         wxSetting.setFlag("2");
         String accessToken = WxUtil.getAccessToken(wxSetting.getAppId(), wxSetting.getAppSecret());
         //发送消息
-        String result = WxUtil.sendMsg(accessToken, msg.get("msg").toString(),wxSetting,null);
+        String result = WxUtil.sendMsg(accessToken, msg.get("msg").toString(), wxSetting, null);
+        //记录到库
+        WaMessage waMessage = new WaMessage();
+        waMessage.setContent(msg.get("msg").toString());
+        waMessage.setCreate_time(new Date());
+        waMessageService.save(waMessage);
         return result;
     }
 

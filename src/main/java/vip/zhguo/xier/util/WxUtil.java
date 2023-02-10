@@ -2,9 +2,13 @@ package vip.zhguo.xier.util;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.core.ApplicationContext;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import vip.zhguo.xier.entity.WaMessage;
 import vip.zhguo.xier.pojo.WeatherDTO;
 import vip.zhguo.xier.pojo.WxSetting;
+import vip.zhguo.xier.service.IWaMessageService;
 
 import java.util.*;
 
@@ -33,6 +37,8 @@ public class WxUtil {
     }
 
     public static String sendMsg(String accessToken, String msg, WxSetting wxSetting, WeatherDTO weatherDTO) throws Exception {
+
+
         //顶层json
         Map map = new HashMap<String, String>();
         //dataJson
@@ -94,10 +100,8 @@ public class WxUtil {
         }
         //封装msg
         dataMap.put("msg", contentVC);
-//        log.info(dataMap.toString());
         map.put("topcolor", RandomColorUtil.getRandomColor());
         map.put("data", dataMap);
-//        log.info(map.toString());
         String senData = JSONObject.toJSON(map).toString();
         log.info(senData);
         String result = NetUtil.doPost(sendMsgUrl.toString(), senData);
